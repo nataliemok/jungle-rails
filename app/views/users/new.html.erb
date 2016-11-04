@@ -1,0 +1,17 @@
+<% @page_title = "UserAuth | Signup" %>
+<div class="Sign_Form">
+  <h1>Sign Up</h1>
+  <%= form_for(:user, :url => '/users') do |f| %>
+
+  <% if flash.alert %>
+  <div class="alert alert-danger"> <%= flash.alert %> </div>
+  <% end %>
+
+    <p> First Name:</br> <%= f.text_field :first_name%> </p>
+    <p> Last Name:</br> <%= f.text_field :last_name%> </p>
+    <p> Email:</br> <%= f.text_field :email%> </p>
+    <p> Password:</br> <%= f.password_field :password%></p>
+    <p> Password Confirmation:</br> <%= f.password_field :password_confirmation %> </p>
+    <%= f.submit :Signup %>
+  <% end %>
+</div>

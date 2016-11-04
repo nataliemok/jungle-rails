@@ -1,0 +1,26 @@
+
+<!-- Only take the 3 most recent reviews in reverse chrono order -->
+<% reviews_with_descr = @reviews.select { |review| review.description != '' } %>
+  <% reviews_with_descr.last(3).reverse.each do |r| %>
+
+    <div class="panel panel-info">
+      <div class="panel-heading">
+        <span class='rating-user'>
+           <b><%= r.user.first_name %></b>
+        </span>
+        <!--  Stars for ratings  -->
+        <% (0..r.rating-1).each do %>
+        <span class="glyphicon glyphicon-star" style="color: #ffbf00"></span>
+        <% end %>
+        <% (r.rating..4).each do %>
+        <span class="glyphicon glyphicon-star-empty" style="color: #ffbf00"></span>
+        <% end %>
+        <% if current_user && r.user.id == current_user.id %>
+        <%= link_to fa_icon('trash'), [@product, r], class: 'btn btn-sm btn-danger', method: :delete, data: { confirm: "Are you sure?" } %>
+        <% end %>
+        <span style="float: right"> Posted on: <%= r.updated_at.strftime('%v') %> </span>
+      </div>
+      <div class="panel-body"><%= r.description %></div>
+    </div>
+  <% end %>
+</div>
